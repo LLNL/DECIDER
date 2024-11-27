@@ -117,13 +117,18 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            In this work, we introduce <b>DECIDER (Debiasing Classifiers to Identify Errors Reliably)</b>, a novel method for detecting failures in image classification models. 
-            DECIDER uses large language models (LLMs) to identify key task-relevant attributes and vision-language models (VLMs) to align visual features to these attributes, creating a "debiased" version of the classifier. 
-            Potential failures are detected by measuring the disagreement between the original and debiased models. 
-            DECIDER not only identifies likely failures but also provides interpretable explanations through an attribute-ablation strategy. 
-            Across various benchmarks, DECIDER outperforms existing methods in failure detection.
+            Reliably detecting when a deployed machine learning model is likely to fail on a given input is crucial for ensuring safe operation. In this work, we propose   <b>DECIDER (Debiasing
+              Classifiers to Identify Errors Reliably)</b>, a novel approach that leverages priors from large
+              language models (LLMs) and vision-language models (VLMs) to detect failures in image
+              classification models. DECIDER utilizes LLMs to specify task-relevant core attributes and
+              constructs a “debiased” version of the classifier by aligning its visual features to these core
+              attributes using a VLM, and detects potential failure by measuring disagreement between
+              the original and debiased models. In addition to proactively identifying samples on which
+              the model would fail, DECIDER also provides human-interpretable explanations for failure
+              through a novel attribute-ablation strategy. Through extensive experiments across diverse
+              benchmarks spanning subpopulation shifts (spurious correlations, class imbalance) and covariate shifts (synthetic corruptions, domain shifts), DECIDER consistently achieves stateof-the-art failure detection performance, significantly outperforming baselines in terms of
+              the overall Matthews correlation coefficient as well as failure and success recall.
           </p>
-          
         </div>
       </div>
     </div>
@@ -131,45 +136,10 @@
   
 <section class="section" id="intro">
   <div class="container is-max-desktop content">
+    <h2 class="title">Deep classifiers fail due to a variety of reasons</h2>
 
-    <h2 class="title">Deep Classifiers Fail for Various Reasons</h2>
+    
 
-      <p>Detecting model failures is critical in high-stakes applications like ADAS systems and medical imaging, where misclassifications can lead to severe consequences.</p>
-      <p>Failures often stem from:</p>
-      <ul>
-        <li>Spurious correlations in training data</li>
-        <li>Class imbalances between training and test sets</li>
-        <li>Emergence of novel attributes during testing</li>
-      </ul>
-      <img src="./assets/shifts_cropped.png" alt="Right Justified Image" class="centered-figure" width="100%" height="100%" style="margin-top: 20px; margin-bottom: 20px;">
-      <h4 class="title">Challenges in Failure Detection</h4>
-
-      <p>Current methods rely on uncertainty metrics like Maximum Softmax Probability but struggle with subtle shifts and are not always well-calibrated. Moreover, these approaches fail to explain the reasons for failure, especially when nuisance attributes can't be captured by visual features alone.</p>
-
-
-      <h2 class="title">Our Approach</h2>
-      <p>We introduce a failure detection framework using <b>Vision-Language Models (VLMs)</b> and <b>Large Language Models (LLMs)</b> to address two key challenges:</p>
-      <ul>
-        <li>Traditional classifiers often fail due to biases from irrelevant attributes.</li>
-        <li>Failure detection should provide human-interpretable explanations.</li>
-      </ul>
-      <p>We align classifiers with task-relevant attributes and detect failures by measuring the disagreement between the original and debiased models.</p>
-      
-      <h3 class="title">DECIDER Framework</h3>
-      
-      <p><b>Core Attribute Generation:</b> We use LLMs like GPT-3 to generate task-relevant core attributes, helping to debias the classifier. These attributes are then aligned with image features through the Prior Induced Model (PIM), which is trained using cross-entropy loss and VLM embeddings.</p>
-
-      <p><b>Failure Detection:</b> Failures are detected by measuring the disagreement between PIM and the original classifier.</p>
-      
-      <p><b>Explaining Failures:</b> Attribute ablation identifies the cause of discrepancies in predictions, offering insights into model failures.</p>
-      
-      
-      <figure class="image">
-        <img src="assets/architecture.png" alt="DECIDER Architecture">
-        <figcaption>Figure: DECIDER framework overview.</figcaption>
-      </figure>
-      
-    <!-- <h2 class="title">Deep classifiers fail due to a variety of reasons</h2>
   
     <p>
       Proactively detecting instances where a classification model is likely to fail (i.e., predict incorrect labels) is essential for deploying models safely in real-world applications. For example, in an ADAS system, misidentifying a pedestrian as a road sign, or in medical imaging, mistaking a tumor for a benign lesion, can lead to catastrophic outcomes. At a minimum, models should be able to accurately flag these high-risk samples.
@@ -205,9 +175,9 @@
 
   
     <p><b>Lastly and more importantly, failure detection as it is currently posed is fundamentally limited because it is not only difficult, but also inefficient, to describe the nuisance attribute discrepancies mentioned in the previous section solely using visual features. </b></p>
-    <p></p> -->
+    <p></p>
 
- <!-- <h2 class=title"> Our Approach</h2>
+ <h2 class="title"> Our Approach</h2>
   To address the afore mentioned challenges, we propose a novel framework for failure detection that leverages the capabilities of <b>Vision-Language Models (VLMs)</b> and <b>Large Language Models (LLMs)</b>. 
   Vision-Language Models (VLMs) trained on large corpora of visual and textual data have demonstrated remarkable capabilities in understanding complex visual concepts and achieve remarkable zero-shot performance on a wide range of vision tasks. Through out this work, we use OpenAI's CLIP VLM model which produces image and text embeddings by respective vision and text encoders and measures their similarity (cosine similarity) in the shared latent space. 
  </p>
@@ -256,7 +226,6 @@ In the figure below, we illustrate the DECIDER framework with left being the fai
   </figure>
 
 
- -->
 
 
 
@@ -269,31 +238,47 @@ In the figure below, we illustrate the DECIDER framework with left being the fai
 
 
 
- <h2 class="title">How Well Does DECIDER Work in Practice?</h2>
 
- <p>We tested DECIDER's failure detection on various shifts including subpopulation shifts (spurious correlations, class imbalance) and covariate shifts (synthetic corruptions, domain shifts) using ResNet-18, ResNet-50, and ViT-Base architectures. DECIDER outperformed baselines such as softmax probability, entropy, energy scores, and ensemble disagreement, measured by Matthews Correlation Coefficient (MCC), Failure Recall (FR), and Success Recall (SR). Full results can be found in our paper.</p>
- 
- <h5 style="color:rgb(49, 30, 255);">A Quick Result</h5>
- <ul>
-   <li><b>Covariate Shifts:</b> DECIDER shows significant MCC and failure recall improvements over baselines on benchmarks like PACS, DomainNet, and ImageNet-Sketch.</li>
- </ul>
- 
- <figure class="image">
-   <img src="assets/covariate_results.png" alt="DECIDER performance on covariate shifts">
-   <figcaption>Figure: (a) MCC difference between DECIDER and the best baseline on PACS. (b) Failure recall improvement on DomainNet and ImageNet-Sketch.</figcaption>
- </figure>
- 
- <h5 style="color:rgb(255, 139, 30);">DECIDER Explains Model Failures</h5>
- 
- <p>DECIDER's attribute ablations explain failures. For example, it identifies overlooked core attributes, like "Browning Tresses" in hair color classification or "Thin Whiskers" in cat identification, helping understand why the original model misclassified.</p>
- 
- <figure class="image">
-   <img src="assets/explanations.png" alt="DECIDER explanations for model failures">
-   <figcaption>Figure: DECIDER explanations reveal core attributes missed by the task model that caused misclassification.</figcaption>
- </figure>
- 
+  <h2 class="title">How well does DECIDER work in practice? </h2>
 
-<!-- <p></p>
+  Time for some experiments and results. 😊
+
+  <p>We evaluated failure detection capabilites of DECIDER, when the original classifier could potentially fail due to a diverse set of shifts during test-time including subpopulation shifts (spurious correlations and  class imbalance), and covariate shifts (synthetic corruptions, and domain shifts). For the base model architecture, we considered ResNet-18, ResNet-50, and ViT-Base. We compared DECIDER against baseline methods like maximum softmax probability, predictive entropy, energy-based scores, and ensemble disagreement. To quantify the performance, we used Matthews Correlation Coefficient (MCC), Failure Recall (FR), and Success Recall (SR) as our evaluation metrics. 
+  <b>Through our empirical analysis, we find that DECIDER consistently outperforms the baselines across all metrics on all the benchmarks. Please check our paper for the full results!</b>
+    
+
+ </p>
+<p></p>
+ <h5 style="color:rgb(49, 30, 255);">A quick look at one result</h5>
+
+<ul>
+  <li><b>Effectiveness under covariate shifts:</b> </li>
+</ul>
+
+<figure class="image">
+  <img src="assets/covariate_results.png" alt="DECIDER performance on covariate shifts">
+  <figcaption>Figure:(a) Difference in MCC between DECIDER and the best baseline on the PACS dataset involving covariate shifts across 4 different visual domains. (b) Improvement in failure recall performance of the best performing baseline and DECIDER on large-scale covariate shift benchmarks- DomainNet (DNet) and ImageNet-Sketch.</figcaption>
+
+</figure>
+Note, for (b) PIMs are trained on DomainNet Real and Imagenet train sets respectively and evaluated on the different distribution shift datasets. 
+We ask the readers to refer to the paper for more details and experiments.
+ <p></p>
+ <h5 style="color:rgb(255, 139, 30);">DECIDER explains model failures</h5>
+
+ <p>Using the procedure described earlier, we performed attribute ablations to generate explanations for model failures. In the figure below, we present a few examples. In the bottom-left example, the task is to correctly identify hair color (blonde or not). The original classifier incorrectly labels the image, while PIM accurately classifies it. We observe that our optimization process reduces the influence of attributes like "Browning Tresses" and "Red Highlights" on PIM's predictions to make the predictions more similar to the original model. This indicates that the biased original classifier may have overlooked these key attributes in its decision-making.</p>
+
+<p>Similarly, in the top-right example, the original model misclassifies a cat as a dog. Our explanation shows that the classifier failed to focus on important core attributes like "Thin Whiskers," leading to the incorrect classification.</p>
+
+<p>We believe these explanations are valuable for understanding model behavior in real-world scenarios. They can also help improve model reliability by guiding the selection of training samples that emphasize core attributes the original model overlooked.</p>
+
+<figure class="image">
+  <img src="assets/explanations.png" alt="DECIDER explanations for model failures">
+  <figcaption>Figure: DECIDER explanations for model failures. The task model  misclassifies the images, while PIM correctly identifies them. The optimization process in DECIDER reveals which core attributes were not sufficiently considered by the task model, leading to the misclassification.</figcaption>
+</figure>
+
+
+
+<p></p>
 <h5 style="color:rgb(182, 12, 191);">Some important findings and analyses</h5>
 
 <li>
@@ -338,21 +323,9 @@ In the figure below, we illustrate the DECIDER framework with left being the fai
 
 </li>
 
- -->
 
- <h5 style="color:rgb(182, 12, 191);">Key Findings</h5>
 
- <li><b>What if LLM attributes are biased or insufficient?</b>
- <ul>
-   <li><b>Irrelevant attributes:</b> PIM may learn noisy rules, but still outperforms baselines.</li>
-   <li><b>Insufficient attributes:</b> PIM's performance drops but remains better than baseline methods.</li>
- </ul>
- We tested these scenarios on the Waterbirds dataset, and even with attribute corruption, DECIDER outperformed entropy-based baselines.</li>
- 
- <li><b>Accuracy of PIM vs. DECIDER's performance:</b> Even if PIM’s accuracy drops slightly, its ability to differentiate core and nuisance attributes remains strong, ensuring better failure detection than baseline methods.</li>
- 
- <li><b>Replacing PIM with CLIP classifiers:</b> Using CLIP’s zero-shot classifier directly reduces failure detection performance, as its visual features and attribute correlations differ significantly from the original model.</li>
- 
+
 
 
 
