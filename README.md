@@ -1,6 +1,6 @@
 # DECIDER
 
-[![Paper](https://img.shields.io/badge/Paper-Download-red)](https://arxiv.org/pdf/2408.00331) [![Website](https://img.shields.io/badge/Website-Visit-brightgreen)](https://link-to-website) 
+[![Paper](https://img.shields.io/badge/Paper-Download-red)](https://arxiv.org/pdf/2408.00331) [![Website](https://img.shields.io/badge/Website-Visit-brightgreen)](https://software.llnl.gov/DECIDER) 
 
 <!-- [![Video](https://img.shields.io/badge/Video-Watch-blue)](https://link-to-video) -->
 
