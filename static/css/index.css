@@ -1,0 +1,254 @@
+body {
+    font-family: 'Noto Sans', sans-serif;
+  }
+  
+  
+  .footer .icon-link {
+      font-size: 25px;
+      color: #000;
+  }
+  
+  .link-block a {
+      margin-top: 5px;
+      margin-bottom: 5px;
+  }
+  
+  .dnerf {
+    font-variant: small-caps;
+  }
+  
+  
+  .teaser .hero-body {
+    padding-top: 0;
+    padding-bottom: 3rem;
+  }
+  
+  .teaser {
+    font-family: 'Google Sans', sans-serif;
+  }
+  
+  
+  .publication-title {
+  }
+  
+  .publication-banner {
+    max-height: parent;
+  
+  }
+  
+  .publication-banner video {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    object-fit: fit;
+  }
+  
+  .publication-header .hero-body {
+  }
+  
+  .publication-title {
+      font-family: 'Google Sans', sans-serif;
+  }
+  
+  .publication-authors {
+      font-family: 'Google Sans', sans-serif;
+  }
+  
+  .publication-venue {
+      color: #555;
+      width: fit-content;
+      font-weight: bold;
+  }
+  
+  .publication-awards {
+      color: #ff3860;
+      width: fit-content;
+      font-weight: bolder;
+  }
+  
+  .publication-authors {
+  }
+  
+  .publication-authors a {
+     color: hsl(204, 86%, 53%) !important;
+  }
+  
+  .publication-authors a:hover {
+      text-decoration: underline;
+  }
+  
+  .author-block {
+    display: inline-block;
+  }
+  
+  .publication-banner img {
+  }
+  
+  .publication-authors {
+    /*color: #4286f4;*/
+  }
+  
+  .publication-video {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: 56.25%;
+  
+      overflow: hidden;
+      border-radius: 10px !important;
+  }
+  
+  .publication-video iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+  }
+  
+  .publication-body img {
+  }
+  
+  .results-carousel {
+    overflow: hidden;
+  }
+  
+  .results-carousel .item {
+    margin: 5px;
+    overflow: hidden;
+    border: 1px solid #bbb;
+    border-radius: 10px;
+    padding: 0;
+    font-size: 0;
+  }
+  
+  .results-carousel video {
+    margin: 0;
+  }
+  
+  
+  .interpolation-panel {
+    background: #f5f5f5;
+    border-radius: 10px;
+  }
+  
+  .interpolation-panel .interpolation-image {
+    width: 100%;
+    border-radius: 5px;
+  }
+  
+  .interpolation-video-column {
+  }
+  
+  .interpolation-panel .slider {
+    margin: 0 !important;
+  }
+  
+  .interpolation-panel .slider {
+    margin: 0 !important;
+  }
+  
+  #interpolation-image-wrapper {
+    width: 100%;
+  }
+  #interpolation-image-wrapper img {
+    border-radius: 5px;
+  }
+
+  .logo {
+    display: inline-block;
+    margin-right: 10px; /* Adjust margin as needed */
+  }
+
+  .left-justified-text {
+    text-align: left;
+  }
+
+  .right-justified-image {
+    float: right;
+    margin: 0 0 20px 20px; /* Adjust margin as needed */
+  }
+
+  .custom-list {
+    list-style: none; /* Remove default bullets */
+    padding-left: 0; /* Remove default left padding */
+  }
+  
+  .custom-list li {
+    margin-bottom: 10px; /* Add margin between list items */
+  }
+  
+  .custom-list li:before {
+    content: "\2022"; /* Use Unicode character for bullet (•) */
+    display: inline-block; /* Ensure the bullet is displayed inline */
+    width: 1em; /* Set width of the bullet to align text properly */
+    margin-left: -1em; /* Move bullet to the left to align with text */
+    margin-right: 5px; /* Adjust space between bullet and text */
+  } 
+
+  .image-grid {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .image-link {
+    display: block;
+    margin: 10px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .image-link img {
+    width: 200px;
+    height: auto;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .image-link:hover img {
+    transform: scale(1.05);
+  }
+  
+  .caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+  }
+  
+  .image-link:hover .caption {
+    opacity: 1;
+  }
+
+  #large-image-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+  }
+  
+  #large-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90%;
+    max-height: 90%;
+  }
+
+
+.centered-figure {
+    display: block;
+    margin: 0 auto;
+}
