@@ -1,0 +1,12 @@
+{"NICOpp_core":"List 10 distinct two-word phrases that describe visual characteristics like(shape, color, texture), domain-related attributes, conventional background and general photo elements of a {class_name}.Make sure the phrases are not long descriptions.",
+"NICOpp_att":"List 100 distinct two-word phrases that describe visual characteristics, conventional background and general photo elements of a {class_name}.Make sure the phrases are not long descriptions.",
+"domainnet": "list 100 distinct two-word phrases to describe the {class_name} domain from the DomainNet dataset involves focusing on distinct visual elements and styles typical of {class_name}.",
+"Waterbirds_core": "List 20 distinct two-word phrases that uniquely describe the visual characteristics(like type of feet, beak, wings, plumage, feathers, feathers texture, body shape, body type etc) {class_name}. Make sure the phrases are not long descriptions.",
+"Waterbirds_noncore": "List 20 distinct two-word phrases that uniquely describe the visual characteristics of the typical habitat and setting of {class_name}. Make sure the phrases are not long descriptions.",
+"cifar100_core": "List 10 distinct two-word phrases that uniquely describe the visual characteristics(like shape, color, texture) of {class_name}. Make sure the phrases are not long descriptions.",
+"pacs_core": "List 10 distinct two-word phrases that uniquely describe the visual characteristics of {class_name}. Do not describe their colors. Make sure the phrases are not long descriptions.",
+"Metashift_core": "List 10 distinct phrases that uniquely describe the visual characteristics of {class_name}. Make sure the phrases are not long descriptions.",
+"imagenet_core": "List 3 distinct two-word phrases that uniquely describe the visual characteristics of {class_name}. Make sure the phrases are not long descriptions.",
+"CelebA_core": "List 5 distinct two-word phrases that uniquely describe the visual characteristics of {class_name} hair person. Make sure the phrases are not long descriptions.",
+"cats_dogs_core": "List 10 distinct two-word phrases that uniquely describe the visual characteristics of {class_name}. Make sure the phrases are not long descriptions."
+}
