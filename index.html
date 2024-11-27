@@ -1,24 +1,421 @@
+<!DOCTYPE html>
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coming Soon</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-        h1 {
-            font-size: 48px;
-            color: #333;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="DECIDER: Leveraging Foundation Model Priors for Improved Model Failure Detection and Explanation">
+  <meta name="keywords" content="Failure detection, Vision-Language Models, Large-language Models">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DECIDER: Leveraging Foundation Model Priors for Improved Model Failure Detection and Explanation</title>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+  <script type="text/javascript"
+    src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
 </head>
 <body>
-    <h1>Project Website of our paper is <a href="https://kowshikthopalli.github.io/DECIDER/">here</a></h1>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <div class="logo">
+            <a href="#">
+              <img src="./assets/decider_logo.png" alt="Logo" style="width: 300px; height: auto;">
+            </a>
+          </div>
+          <h1 class="title is-1 publication-title">DECIDER: Leveraging Foundation Model Priors for Improved Model Failure Detection and Explanation</h1>
+          <div class="is-size-5 publication-authors">
+          <span class="author-block">
+            <a href="https://rakshith-2905.github.io/portfolio">Rakshith Subramanyam</a><sup>1*</sup>,
+          </span>
+          <span class="author-block">
+            <a href="https://kowshikthopalli.github.io">Kowshik Thopalli</a><sup>2*</sup>,</span>
+          <span class="author-block">
+            <span class="author-block">
+              <a href="https://vivsivaraman.github.io">Vivek Narayanaswamy</a><sup>2*</sup>,</span>
+              <a href="https://jjthiagarajan.com">Jayaraman J. Thiagarajan</a><sup>2</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Axio.ai</span>
+            <span class="author-block"><sup>2</sup>Lawrence Livermore National Laboratory </span>
+            
+            
+          </div>
+          <p><sup>*</sup> These authors contributed equally to this work.</p>
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2408.00331"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2408.00331"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/LLNL/DECIDER"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            In this work, we introduce <b>DECIDER (Debiasing Classifiers to Identify Errors Reliably)</b>, a novel method for detecting failures in image classification models. 
+            DECIDER uses large language models (LLMs) to identify key task-relevant attributes and vision-language models (VLMs) to align visual features to these attributes, creating a "debiased" version of the classifier. 
+            Potential failures are detected by measuring the disagreement between the original and debiased models. 
+            DECIDER not only identifies likely failures but also provides interpretable explanations through an attribute-ablation strategy. 
+            Across various benchmarks, DECIDER outperforms existing methods in failure detection.
+          </p>
+          
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  
+<section class="section" id="intro">
+  <div class="container is-max-desktop content">
+
+    <h2 class="title">Deep Classifiers Fail for Various Reasons</h2>
+
+      <p>Detecting model failures is critical in high-stakes applications like ADAS systems and medical imaging, where misclassifications can lead to severe consequences.</p>
+      <p>Failures often stem from:</p>
+      <ul>
+        <li>Spurious correlations in training data</li>
+        <li>Class imbalances between training and test sets</li>
+        <li>Emergence of novel attributes during testing</li>
+      </ul>
+      <img src="./assets/shifts_cropped.png" alt="Right Justified Image" class="centered-figure" width="100%" height="100%" style="margin-top: 20px; margin-bottom: 20px;">
+      <h4 class="title">Challenges in Failure Detection</h4>
+
+      <p>Current methods rely on uncertainty metrics like Maximum Softmax Probability but struggle with subtle shifts and are not always well-calibrated. Moreover, these approaches fail to explain the reasons for failure, especially when nuisance attributes can't be captured by visual features alone.</p>
+
+
+      <h2 class="title">Our Approach</h2>
+      <p>We introduce a failure detection framework using <b>Vision-Language Models (VLMs)</b> and <b>Large Language Models (LLMs)</b> to address two key challenges:</p>
+      <ul>
+        <li>Traditional classifiers often fail due to biases from irrelevant attributes.</li>
+        <li>Failure detection should provide human-interpretable explanations.</li>
+      </ul>
+      <p>We align classifiers with task-relevant attributes and detect failures by measuring the disagreement between the original and debiased models.</p>
+      
+      <h3 class="title">DECIDER Framework</h3>
+      
+      <p><b>Core Attribute Generation:</b> We use LLMs like GPT-3 to generate task-relevant core attributes, helping to debias the classifier. These attributes are then aligned with image features through the Prior Induced Model (PIM), which is trained using cross-entropy loss and VLM embeddings.</p>
+
+      <p><b>Failure Detection:</b> Failures are detected by measuring the disagreement between PIM and the original classifier.</p>
+      
+      <p><b>Explaining Failures:</b> Attribute ablation identifies the cause of discrepancies in predictions, offering insights into model failures.</p>
+      
+      
+      <figure class="image">
+        <img src="assets/architecture.png" alt="DECIDER Architecture">
+        <figcaption>Figure: DECIDER framework overview.</figcaption>
+      </figure>
+      
+    <!-- <h2 class="title">Deep classifiers fail due to a variety of reasons</h2>
+  
+    <p>
+      Proactively detecting instances where a classification model is likely to fail (i.e., predict incorrect labels) is essential for deploying models safely in real-world applications. For example, in an ADAS system, misidentifying a pedestrian as a road sign, or in medical imaging, mistaking a tumor for a benign lesion, can lead to catastrophic outcomes. At a minimum, models should be able to accurately flag these high-risk samples.
+  </p>
+  
+  <p>
+      Failures in vision models often stem from violations of data distribution assumptions made during training. Typically, data consists of both task-relevant <em>core attributes</em> and irrelevant <em>nuisance attributes</em>, neither of which are explicitly annotated. As a result, models may struggle to generalize if:
+  </p>
+  
+  <ul>
+      <li>The training data contains spurious correlations with nuisance attributes that do not appear during testing.</li>
+      <li>The class-conditional distribution of nuisance attributes changes between the training and test data (e.g., patient race imbalance in clinical datasets).</li>
+      <li>Novel attributes emerge only at test time (e.g., style changes).</li>
+  </ul>
+  
+  <p>
+      In the figure below, we illustrate different failure modes of vision models caused by the above described subpopulation shifts and covariate shifts. In the first example, consider the task where the goal is to identify hair color (blonde or not blonde). If the training set has more blonde men than women, and the model learns to rely on the spuriously correlated gender attribute to predict hair color, it will fail at test time.
+      Similarly, in the second example, class imbalance in the training set may cause the model to poorly generalize to the underrepresented class. Finally, in the third and fourth cases, the model may fail to generalize to the test set due to covariate shifts that range from image corruptions to domain shifts.
+
+      Note that, when the class-conditional distributions of core attributes themselves change between train and test data, it leads to the more challenging scenario of <em>concept shifts</em>, and we do not consider this in this work.
+  </p>
+
+  <img src="./assets/shifts_cropped.png" alt="Right Justified Image" class="centered-figure" width="100%" height="100%" style="margin-top: 20px; margin-bottom: 20px;">
+
+  <h4 class="title">What makes failure detection challenging ?</h4>
+  <p>
+    Given the critical importance and inherent challenges of this problem, there has been a significant increase in research efforts aimed at developing robust methods for failure detection in machine learning models. The most prevalent approach involves leveraging epistemic uncertainties of the model. Fundamentally, the problem of detecting failures is formulated as identifying an appropriate metric or scoring function (some notion of the epistemic uncertainity) that can effectively distinguish between samples where the model is likely to fail and those where it is likely to succeed. Some popular scoring mechanisms that have been proposed include: Maximum Softmax Probability, Predictive Entropy and Energy. These methods aim to utilize the uncertainty in the model's predictions, with the assumption that higher uncertainty may indicate a higher likelihood of failure. There are also other methods such as measuring disagreement between constituent members of an ensemble, through local manifold smoothness that are recently proposed. 
+  </p>
+
+  <p>
+
+    <i>However, the inherenet assumption that underpin these methods is that the classifier models are well-calibrated which may not always hold in practice.  We will also demonstrate through experiments that these methods are not sufficient to accurately detect failures  that arise due to more subtle but important shifts illustrated above.  Furthemore, a cornerstone requirement for any failure detector is that it should also be able to explain the reasons for failure, which is a non-trivial task to be achieved by the methods mentioned above. </i>
+
+  
+    <p><b>Lastly and more importantly, failure detection as it is currently posed is fundamentally limited because it is not only difficult, but also inefficient, to describe the nuisance attribute discrepancies mentioned in the previous section solely using visual features. </b></p>
+    <p></p> -->
+
+ <!-- <h2 class=title"> Our Approach</h2>
+  To address the afore mentioned challenges, we propose a novel framework for failure detection that leverages the capabilities of <b>Vision-Language Models (VLMs)</b> and <b>Large Language Models (LLMs)</b>. 
+  Vision-Language Models (VLMs) trained on large corpora of visual and textual data have demonstrated remarkable capabilities in understanding complex visual concepts and achieve remarkable zero-shot performance on a wide range of vision tasks. Through out this work, we use OpenAI's CLIP VLM model which produces image and text embeddings by respective vision and text encoders and measures their similarity (cosine similarity) in the shared latent space. 
+ </p>
+  Our approach involves leveragring the capabilites of VLMs to detect failure in vision models and the use of VLMs and LLMs are necessitated by two main reasons
+  <ul>
+    <li>Traditional vision classifiers, trained solely on cross-entropy loss with coarse labels, are highly susceptible to biases from task-irrelevant attributes, which we believe is the primary cause for model failures. This challenge arises because these classifiers are tasked to map images to coarse labels that encompass multiple attributes. For example, the  label "dog" may include features like a "wagging tail" and a "snout", while the label "cat" includes "whiskers" and "pointy ears". Without detailed attribute information and given the potential biases in the training data, these models often rely on overly simplistic decision rules. Importanlty, "fixing" this  issue through supervised learning is extemely difficult, because such a fix requires manual annotation of attributes for every sample in the dataset, which is infeasible. 
+    </li>
+    <li>
+      A failure detector should also be able to provide human interpretable explanations for failure. 
+    </li>
+  </ul>
+
+
+Having explained the two main reasons that necessitate the use of VLMs and LLMs, we now describe our approach.  At the highest level, we propose to "debias" the deep classifier by aligninig its visual features to the task-relevantcore attributes of the task and then measure the disagreement between the original and debiased classifiers to detect potential failures. To this end, we utilize LLMs to specify task-relevant core attributes and use the Vision-Language Model (VLMs) to align the features of the classifier to the natural language specification of these attributes.
+Finally, we propose a novel attribute ablation strategy to provide human interpretable explanations for failure. 
+<p></p>
+
+
+  <h3 class="titie">DECIDER framework</h3>
+  <h4 class="title">Generation of Task-relevant core attributes</h4>
+  As mentioned earlier our goal is to align the classifier's visual features with the core task-relevant attributes, thus effectively "debiasing" the model. To identify these attributes for each class without manual annotation, we leverage the priors of a large language model like GPT-3. By querying the LLM with prompts such as "List visually descriptive attributes of &lt;CLASS&gt;" where &lt;CLASS&gt;is the image's class label, we can obtain a set of (natural language) attributes for each class.
+ 
+  <h3 class="title">Training a new model with task-specific attributes </h3>
+ 
+  Given the core attributes for each class, we now aim to reduce the biases learnt by the original classifier by training a new model with these attributes. However, the challenge here is that, these attributes are generated at the level of class and not for individual samples. Thus, we propose to leverage the priors of a powerful vision-language models such as CLIP to associate the image-features from the original classifier with different attributes in the VLM latent space. To that end, we introduce a new model called <b>Prior Induced Model (PIM)</b> that projects the image features from the original classifier to the VLM latent space. The architecture of PIM mirrors the original classifier except that its final layer projects onto the VLM latent space.For example, when both the original and PIM are based on Resnet-50 architecture, the output from block 1 of the classifier serves as the input for block 2 in PIM. 
+<p>
+We now describe how to train PIM. We first begin by computing the similarity between the image features from PIM and the text encodings for each class-specific core attribute obtrained through the (frozen) CLIP text encoder. We then simply aggregate these similarities per class either by averaging them or by taking the maximum similarity score across the attributes for that class. 
+We now have one scalar score for each class which we renormalize through softmax and train the PIM with cross-entropy loss.  This is a much richer training objective than the naive mapping of images to coarse labels as it incorporates the additional information about the core attributes into the training process.
+
+</p>
+<p><u><b>Failure detection using PIM</b></u></p>
+Once we have the PIM, we detect the potential failures of the original classifier by measuring the disagreement between PIM and the original classifier based on the discrepancy between their predictions. This disagreement score is calculated as the cross-entropy between the sample-level probability distributions between the two models. We first compute these scores on a held-out labeled validation set to determine the threshold that approximates the true accuracy on this dataset. At test time, we compute the score for each (unlabled) sample and compare it to the threshold to determine if that sample is likely to fail.
+
+</p>
+
+<p><u><b>Explaining failures</b></u></p>
+
+Now that we have the debiased classifier, that operates in the VLM latent space, we can also leverage it to provide human interpretable explanations for failure. We do so by performing attribute ablations on the debiased classifier to identify the optimal subset of attributes necessary for aligning the PIM's prediction probabilities with those of the original model. This allows us to elucidate the underlying reasons behind the discrepancies between predictions of the original and debiased classifiers.  Specifically, our ablation strategy invoves iteratively adjusting the group of weights (uniformly initialized) corresponding to each attribute across all classes such that the KL divergence between the probability distributions obtained by the task model and those by PIM is minimized. 
+
+
+In the figure below, we illustrate the DECIDER framework with left being the failure detector and right being the explanation generator. 
+
+  <figure class="image">
+    <img src="assets/architecture.png" alt="DECIDER Architecture">
+    <figcaption>Figure: Overview of the DECIDER framework for failure detection and explanation.</figcaption>
+  </figure>
+
+
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+ <h2 class="title">How Well Does DECIDER Work in Practice?</h2>
+
+ <p>We tested DECIDER's failure detection on various shifts including subpopulation shifts (spurious correlations, class imbalance) and covariate shifts (synthetic corruptions, domain shifts) using ResNet-18, ResNet-50, and ViT-Base architectures. DECIDER outperformed baselines such as softmax probability, entropy, energy scores, and ensemble disagreement, measured by Matthews Correlation Coefficient (MCC), Failure Recall (FR), and Success Recall (SR). Full results can be found in our paper.</p>
+ 
+ <h5 style="color:rgb(49, 30, 255);">A Quick Result</h5>
+ <ul>
+   <li><b>Covariate Shifts:</b> DECIDER shows significant MCC and failure recall improvements over baselines on benchmarks like PACS, DomainNet, and ImageNet-Sketch.</li>
+ </ul>
+ 
+ <figure class="image">
+   <img src="assets/covariate_results.png" alt="DECIDER performance on covariate shifts">
+   <figcaption>Figure: (a) MCC difference between DECIDER and the best baseline on PACS. (b) Failure recall improvement on DomainNet and ImageNet-Sketch.</figcaption>
+ </figure>
+ 
+ <h5 style="color:rgb(255, 139, 30);">DECIDER Explains Model Failures</h5>
+ 
+ <p>DECIDER's attribute ablations explain failures. For example, it identifies overlooked core attributes, like "Browning Tresses" in hair color classification or "Thin Whiskers" in cat identification, helping understand why the original model misclassified.</p>
+ 
+ <figure class="image">
+   <img src="assets/explanations.png" alt="DECIDER explanations for model failures">
+   <figcaption>Figure: DECIDER explanations reveal core attributes missed by the task model that caused misclassification.</figcaption>
+ </figure>
+ 
+
+<!-- <p></p>
+<h5 style="color:rgb(182, 12, 191);">Some important findings and analyses</h5>
+
+<li>
+
+  <b>What happens if the attributes generated by the LLM are biased or insufficient?</b>
+
+   The success of DECIDER relies on the
+    quality of the attributes generated by the LLM. To study the impact on failure detection
+    on the quality of text attributes, we consider two practical scenarios:
+    <ul>
+       <strong>(i) GPT-3 generates irrelevant attributes:</strong> In this case, the PIM model has the risk of learning noisy decision rules
+      that even the classifier might not have.
+      <p></p>
+      <strong>(ii) GPT provides insufficient attributes:</strong> With
+      only partial attributes, PIM's predictive performance can be limited.
+    </ul>
+    To comprehensively evaluate the impact of both scenarios, we employ the following protocol on the Waterbirds
+    dataset:
+    <ul>
+      - For scenario (i), we add 5 randomly sampled core attributes from the other class to
+      the attribute set of each class.</li>
+      <p></p>
+      - For case (ii), we remove 5 randomly selected attributes from
+      the attribute set of each class.</li>
+    </ul>
+    We train PIM under both these scenarios. From the results in Table 1 of the paper, although there is a noticeable drop in failure detection performance due to the severe attribute corruptions, DECIDER still outperforms the best baseline (Entropy) method, thus demonstrating the robustness of DECIDER to imperfect attribute sets. 
+    <p></p>
+  <b>What is the relationship between the accuracy of PIM and the performance of DECIDER ?</b>
+  Our findings indicate that even in rare instances where the debiased model PIM produces (minor) lower prediction accuracy, its ability to distinguish between core and nuisance attributes remains intact, which is vital for effective failure detection. As a result, DECIDER consistently outperforms baseline methods in terms of failure recall.
+  <p></p>
+  <b>What happens if we replace PIM with CLIP classifiers ?</b>
+  
+  Given that we propose to leverage the priors from CLIP to obtain a debiased version of the classifier, it is natural to consider directly utilizing CLIP's zero-shot classifier directly as PIM. From Table 3 in appendix of the paper we observe that such
+    an approach yields poor failure detection performance. This is because the visual features and their correlations to the core
+    attributes of CLIP can differ significantly from the original model, thus rendering the model
+    disagreement based failure detection highly ineffective. 
+  <p></p>
+  
+
+  <p></p>
+
+
+</li>
+
+ -->
+
+ <h5 style="color:rgb(182, 12, 191);">Key Findings</h5>
+
+ <li><b>What if LLM attributes are biased or insufficient?</b>
+ <ul>
+   <li><b>Irrelevant attributes:</b> PIM may learn noisy rules, but still outperforms baselines.</li>
+   <li><b>Insufficient attributes:</b> PIM's performance drops but remains better than baseline methods.</li>
+ </ul>
+ We tested these scenarios on the Waterbirds dataset, and even with attribute corruption, DECIDER outperformed entropy-based baselines.</li>
+ 
+ <li><b>Accuracy of PIM vs. DECIDER's performance:</b> Even if PIM’s accuracy drops slightly, its ability to differentiate core and nuisance attributes remains strong, ensuring better failure detection than baseline methods.</li>
+ 
+ <li><b>Replacing PIM with CLIP classifiers:</b> Using CLIP’s zero-shot classifier directly reduces failure detection performance, as its visual features and attribute correlations differ significantly from the original model.</li>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+   
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{
+        subramanyam2024decider,
+        title={DECIDER: Leveraging Foundation Model Priors for Improved Model Failure Detection and Explanation},
+        author={Rakshith Subramanyam and Kowshik Thopalli and Vivek Narayanaswamy and Jayaraman J. Thiagarajan},
+        booktitle={European Conference on Computer Vision},
+        year={2024},
+        url={https://arxiv.org/pdf/2408.00331}
+        }</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="https://arxiv.org/pdf/2408.00331">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://kowshikthopalli.github.io" class="external-link" disabled>
+        <i class="fas fa-home"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website template was borrowed from: <a
+              href="https://github.com/nerfies/nerfies.github.io">here</a>. 
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
