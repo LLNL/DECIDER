@@ -106,3 +106,20 @@ python failure_eval.py \
 - Modify the bash scripts as needed for your specific environment and dataset paths.
 - The `data_path` argument should point to the directory where your datasets are stored.
 - Logs and results will be saved in the `logs/` folder unless a different directory is specified.
+
+## Citation
+
+```
+@inproceedings{subramanyam2025decider,
+  title={DECIDER: Leveraging Foundation Model Priors for Improved Model Failure Detection and Explanation},
+  author={Subramanyam, Rakshith and Thopalli, Kowshik and Narayanaswamy, Vivek and Thiagarajan, Jayaraman J},
+  booktitle={European Conference on Computer Vision},
+  pages={465--482},
+  year={2025},
+  organization={Springer}
+}
+```
+
+## License
+This code is distributed under the terms of the MIT license. All new contributions must be made under this license. LLNL-CODE-2000765 SPDX-License-Identifier: MIT
+
